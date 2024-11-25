@@ -12,4 +12,4 @@ List of installed packages:
 
 Get this image on:
 
-* 
+* https://hub.docker.com/repository/docker/sinfallas/base-node-ionic
