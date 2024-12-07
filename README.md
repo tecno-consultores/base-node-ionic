@@ -1,6 +1,6 @@
 # base-node-ionic
 
-A node 20 Docker image with ionic.
+A node Docker image with ionic. The tag corresponds to the node version
 
 List of installed packages:
 
