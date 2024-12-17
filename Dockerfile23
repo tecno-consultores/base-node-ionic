@@ -1,5 +1,6 @@
 FROM node:23-slim
 RUN mkdir /app
 WORKDIR /app
-RUN apt update -qq && apt-get -y dist-upgrade && apt -y --no-install-recommends --no-install-suggests install awscli wget nano curl git && apt-get clean && apt -y autoremove && rm -rf /var/lib/{apt,dpkg,cache,log}
+RUN apt update -qq && apt -y dist-upgrade && apt -y install --no-install-recommends --no-install-suggests tzdata
+RUN apt update -qq && apt -y dist-upgrade && apt -y install --no-install-recommends --no-install-suggests awscli wget nano curl git && apt-get clean && apt -y autoremove && rm -rf /var/lib/{apt,dpkg,cache,log}
 RUN npm install -g @ionic/cli
