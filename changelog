@@ -1,4 +1,16 @@
-commit 9a0165e562a50859a983ca9605b4e01e8a4c0146 (HEAD -> main, origin/main, origin/HEAD)
+commit a263dbbc2e9b6e66ca17484f4b4300dca9a0b2d8 (HEAD -> main, origin/main)
+Author: Jesus Palencia <sinfallas@gmail.com>
+Date:   Sun Oct 12 07:43:51 2025 -0400
+
+    * update
+
+commit cd2e159d079a6402fbae448805526a314310b688 (tag: v1.2)
+Author: Jesus Palencia <ansistemas4@invertropoli.com>
+Date:   Tue Dec 17 11:25:45 2024 -0400
+
+    * changelog
+
+commit 9a0165e562a50859a983ca9605b4e01e8a4c0146
 Author: Jesus Palencia <ansistemas4@invertropoli.com>
 Date:   Tue Dec 17 11:25:38 2024 -0400
 
