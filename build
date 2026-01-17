@@ -13,7 +13,8 @@ docker buildx build --platform linux/arm64,linux/amd64 --push -t sinfallas/base-
 docker buildx build --platform linux/arm64,linux/amd64 --push -t sinfallas/base-node-ionic:22 --builder=container-builder -f Dockerfile22 .
 docker buildx build --platform linux/arm64,linux/amd64 --push -t sinfallas/base-node-ionic:23 --builder=container-builder -f Dockerfile23 .
 docker buildx build --platform linux/arm64,linux/amd64 --push -t sinfallas/base-node-ionic:24 --builder=container-builder -f Dockerfile24 .
-docker buildx build --platform linux/arm64,linux/amd64 --push -t sinfallas/base-node-ionic:latest --builder=container-builder -f Dockerfile24 .
+docker buildx build --platform linux/arm64,linux/amd64 --push -t sinfallas/base-node-ionic:25 --builder=container-builder -f Dockerfile25 .
+docker buildx build --platform linux/arm64,linux/amd64 --push -t sinfallas/base-node-ionic:latest --builder=container-builder -f Dockerfile25 .
 docker buildx rm container-builder
 docker system prune -af
 
