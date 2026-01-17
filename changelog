@@ -1,4 +1,16 @@
-commit 757791648835445a77661f03c677cc2347c8c903 (HEAD -> main, origin/main)
+commit fb659b0bf076c5a47fe4e57f447cf399f3ffa62c (HEAD -> main, origin/main)
+Author: Jesus Palencia <sinfallas@gmail.com>
+Date:   Sat Jan 17 10:31:10 2026 -0400
+
+    * build script
+
+commit 07aa562225ab2fc372831b2d4e4eef227e257581
+Author: Jesus Palencia <sinfallas@gmail.com>
+Date:   Wed Oct 15 16:50:24 2025 -0400
+
+    * changelog
+
+commit 757791648835445a77661f03c677cc2347c8c903
 Author: Jesus Palencia <sinfallas@gmail.com>
 Date:   Wed Oct 15 16:50:11 2025 -0400
 
