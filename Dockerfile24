@@ -1,6 +1,7 @@
 FROM node:24-slim
+LABEL maintainer="Jesus Palencia sinfallas@gmail.com"
+LABEL build_date="2026-03-29"
 RUN mkdir /app
 WORKDIR /app
-RUN apt update -qq && apt -y dist-upgrade && apt -y install --no-install-recommends --no-install-suggests tzdata s3fs
-RUN apt update -qq && apt -y dist-upgrade && apt -y install --no-install-recommends --no-install-suggests awscli wget nano curl git && apt-get clean && apt -y autoremove && rm -rf /var/lib/{apt,dpkg,cache,log}
+RUN apt update -qq && apt -y dist-upgrade && apt -y install --no-install-recommends --no-install-suggests tzdata s3fs && apt -y install --no-install-recommends --no-install-suggests awscli wget nano curl git && apt-get clean && apt -y autoremove && rm -rf /var/lib/{apt,dpkg,cache,log}
 RUN npm install -g @ionic/cli
