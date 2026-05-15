@@ -12,7 +12,7 @@ List of installed packages:
 * nano
 * git
 
-List od node packages:
+List of node packages:
 
 * ionic
 * pnpm
