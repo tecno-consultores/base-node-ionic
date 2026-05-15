@@ -2,7 +2,7 @@
 
 Warning: NPM has been replaced with PNPM
 
-A node Docker image with ionic. The tag corresponds to the node version
+A node Docker image with ionic and pnpm. The tag corresponds to the node version
 
 List of installed packages:
 
