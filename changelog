@@ -1,4 +1,46 @@
-* commit 5b35a422d56b6dde8027da62d64e1bf3ada9b2a9 (HEAD -> main, origin/main, origin/HEAD)
+* commit d26b86c62512cae1bfac3a7acb59656ff6fce895 (HEAD -> main, origin/main, origin/HEAD)
+| Author: Jesus Palencia <sinfallas@gmail.com>
+| Date:   Wed Jun 17 19:23:43 2026 -0400
+| 
+|     * bugfix
+| 
+* commit 2fe6ebc8ad17e0820b786ba428de62f5df222805
+| Author: Jesus Palencia <sinfallas@gmail.com>
+| Date:   Wed Jun 17 18:44:20 2026 -0400
+| 
+|     * changelog
+| 
+* commit 41fe2d9136ee2e11d056ba8eac6cea58e0295052
+| Author: Jesus Palencia <sinfallas@gmail.com>
+| Date:   Wed Jun 17 18:44:12 2026 -0400
+| 
+|     * updates
+| 
+* commit 157aa54be7f509821b415f1f1d5f375fb096c377 (tag: v1.3)
+| Author: Sinfallas <sinfallas@gmail.com>
+| Date:   Fri May 15 10:09:14 2026 -0400
+| 
+|     Update README.md
+| 
+* commit e5617cf11d0f863c18ca40ef9c308ba89a3bf5bf
+| Author: Sinfallas <sinfallas@gmail.com>
+| Date:   Fri May 15 10:07:31 2026 -0400
+| 
+|     Fix typo in README for node packages list
+| 
+* commit 518423c61d1f59c10d9ea3721d35c9684df8688f
+| Author: Sinfallas <sinfallas@gmail.com>
+| Date:   Fri May 15 10:04:56 2026 -0400
+| 
+|     Update README.md
+| 
+* commit 4e26cf1be88fd89bcd1c28967b86ce373dd61110
+| Author: Jesus Palencia <sinfallas@gmail.com>
+| Date:   Thu May 14 16:06:54 2026 -0400
+| 
+|     * changelog
+| 
+* commit 5b35a422d56b6dde8027da62d64e1bf3ada9b2a9
 | Author: Jesus Palencia <sinfallas@gmail.com>
 | Date:   Thu May 14 16:06:38 2026 -0400
 | 
