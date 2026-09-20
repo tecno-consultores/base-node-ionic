@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.created=$BUILD_DATE
 ENV PNPM_HOME="/pnpm"
 ENV PATH="/pnpm:/pnpm/bin:$PATH"
 
-v
+RUN npm install -g pnpm@latest && pnpm config set global-bin-dir /pnpm/bin
 RUN rm -rf /usr/local/bin/npm && ln -s /usr/local/bin/pnpm /usr/local/bin/npm
 
 WORKDIR /app
