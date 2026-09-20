@@ -1,7 +1,5 @@
 FROM node:25-slim
-ARG BUILD_DATE
 LABEL org.opencontainers.image.authors="sinfallas@gmail.com"
-LABEL org.opencontainers.image.created=$BUILD_DATE
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="/pnpm:/pnpm/bin:$PATH"
@@ -14,3 +12,5 @@ RUN apt update -qq && apt -y dist-upgrade && apt -y install --no-install-recomme
 RUN pnpm add --global @ionic/cli
 
 CMD ["/bin/bash"]
+ARG BUILD_DATE
+LABEL org.opencontainers.image.created=$BUILD_DATE
