@@ -17,7 +17,8 @@ docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$C
 docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:23 --builder=container-builder -f Dockerfile23 .
 docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:24 --builder=container-builder -f Dockerfile24 .
 docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:25 --builder=container-builder -f Dockerfile25 .
-docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:latest --builder=container-builder -f Dockerfile25 .
+docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:26 --builder=container-builder -f Dockerfile26 .
+docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:latest --builder=container-builder -f Dockerfile26 .
 docker buildx rm container-builder
 docker system prune -af
 docker builder prune -af

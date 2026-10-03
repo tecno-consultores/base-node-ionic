@@ -1,0 +1,16 @@
+FROM node:26-slim
+LABEL org.opencontainers.image.authors="sinfallas@gmail.com"
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="/pnpm:/pnpm/bin:$PATH"
+
+RUN npm install -g pnpm@latest && pnpm config set global-bin-dir /pnpm/bin
+RUN rm -rf /usr/local/bin/npm && ln -s /usr/local/bin/pnpm /usr/local/bin/npm
+
+WORKDIR /app
+RUN apt update -qq && apt -y dist-upgrade && apt -y install --no-install-recommends --no-install-suggests tzdata s3fs awscli wget nano curl git && apt-get clean && apt -y autoremove && rm -rf /var/lib/{apt,dpkg,cache,log}
+RUN pnpm add --global @ionic/cli
+
+CMD ["/bin/bash"]
+ARG BUILD_DATE
+LABEL org.opencontainers.image.created=$BUILD_DATE
