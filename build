@@ -13,9 +13,9 @@ CURRENT_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 docker run --privileged --rm tonistiigi/binfmt --install all
 docker buildx rm container-builder
 docker buildx create --name container-builder --driver docker-container --bootstrap --use
-docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:22 --builder=container-builder -f Dockerfile22 .
-docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:23 --builder=container-builder -f Dockerfile23 .
-docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:24 --builder=container-builder -f Dockerfile24 .
+#docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:22 --builder=container-builder -f Dockerfile22 .
+#docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:23 --builder=container-builder -f Dockerfile23 .
+#docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:24 --builder=container-builder -f Dockerfile24 .
 docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:25 --builder=container-builder -f Dockerfile25 .
 docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:26 --builder=container-builder -f Dockerfile26 .
 docker buildx build --platform linux/arm64,linux/amd64 --build-arg BUILD_DATE=$CURRENT_DATE --push -t sinfallas/base-node-ionic:latest --builder=container-builder -f Dockerfile26 .

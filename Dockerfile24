@@ -1,15 +1,22 @@
-FROM node:24-slim
+ARG NODE_VERSION=24
+ARG BASE_RUNTIME_DISTRO=slim
+
+FROM node:${NODE_VERSION}-${BASE_RUNTIME_DISTRO}
 LABEL org.opencontainers.image.authors="sinfallas@gmail.com"
 
+ARG PNPM_VERSION=latest
 ENV PNPM_HOME="/pnpm"
-ENV PATH="/pnpm:/pnpm/bin:$PATH"
-
-RUN npm install -g pnpm@latest && pnpm config set global-bin-dir /pnpm/bin
-RUN rm -rf /usr/local/bin/npm && ln -s /usr/local/bin/pnpm /usr/local/bin/npm
+ENV PATH="$PNPM_HOME/bin:$PNPM_HOME:$PATH"
 
 WORKDIR /app
+
+RUN mkdir -p "$PNPM_HOME"
 RUN apt update -qq && apt -y dist-upgrade && apt -y install --no-install-recommends --no-install-suggests tzdata s3fs awscli wget nano curl git && apt-get clean && apt -y autoremove && rm -rf /var/lib/{apt,dpkg,cache,log}
+RUN npm install -g pnpm@${PNPM_VERSION} && npm cache clean --force
 RUN pnpm add --global @ionic/cli
+RUN mv /usr/local/bin/npm /usr/local/bin/.npm-real
+COPY npm-shield.sh /usr/local/bin/npm
+RUN chmod +x /usr/local/bin/npm
 
 CMD ["/bin/bash"]
 ARG BUILD_DATE
