@@ -2,7 +2,7 @@ ARG NODE_VERSION=22
 ARG BASE_RUNTIME_DISTRO=slim
 
 FROM node:${NODE_VERSION}-${BASE_RUNTIME_DISTRO}
-LABEL org.opencontainers.image.authors="sinfallas@gmail.com"
+LABEL org.opencontainers.image.authors="Jesus Palencia <sinfallas@gmail.com> (Creado en Tecno Consultores)"
 
 ARG PNPM_VERSION=latest
 ENV PNPM_HOME="/pnpm"

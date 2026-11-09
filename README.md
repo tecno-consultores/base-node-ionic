@@ -20,3 +20,6 @@ List of node packages:
 Get this image on:
 
 * https://hub.docker.com/r/sinfallas/base-node-ionic
+
+
+Copyright (C) 2026 Jesus Palencia <sinfallas@gmail.com> (Creado en Tecno Consultores)
