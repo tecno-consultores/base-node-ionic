@@ -1,0 +1,6 @@
+{
+  "name": "base-node-ionic-example",
+  "integrations": {},
+  "type": "vue-vite",
+  "npmClient": "pnpm"
+}
