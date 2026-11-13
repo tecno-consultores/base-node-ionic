@@ -10,18 +10,52 @@ ARG PNPM_VERSION=latest
 ARG IONIC_VERSION=latest
 
 ENV PNPM_HOME="/pnpm" \
-    PATH="/pnpm/bin:/pnpm:$PATH"
+    QA11X_GLOBAL_DIR="/opt/qa11x" \
+    NODE_PATH="/opt/qa11x/node_modules:/usr/local/lib/node_modules" \
+    PROMPTFOO_DISABLE_TELEMETRY=1 \
+    DO_NOT_TRACK=1 \
+    SCARF_ANALYTICS=false \
+    PATH="/pnpm/bin:/pnpm:/opt/qa11x/node_modules/.bin:$PATH"
 
 WORKDIR /app
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends --no-install-suggests ca-certificates tzdata s3fs awscli wget nano curl git && apt-get clean && DEBIAN_FRONTEND=noninteractive apt-get -y autoremove --purge && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/*
-RUN --mount=type=cache,id=npm-${TARGETARCH},target=/root/.npm,sharing=locked groupadd -g 10001 appgroup && useradd -u 10001 -g appgroup -m -d /home/appuser -s /usr/sbin/nologin appuser && mkdir -p "$PNPM_HOME" /home/appuser/.config/pnpm && printf "minimum-release-age=1440\n" > /home/appuser/.config/pnpm/rc && npm install -g --no-fund --no-audit "pnpm@${PNPM_VERSION}" && pnpm add --global "@ionic/cli@${IONIC_VERSION}" && pnpm store prune && rm -rf /root/.cache /root/.local/share/pnpm /tmp/* && mv /usr/local/bin/npm /usr/local/bin/.npm-real && chown -R 10001:10001 /app "$PNPM_HOME" /home/appuser
+RUN DEBIAN_FRONTEND=noninteractive apt-get update -qq \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends --no-install-suggests \
+        ca-certificates tzdata s3fs awscli wget nano curl git \
+    && apt-get clean \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y autoremove --purge \
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/*
+
+RUN --mount=type=cache,id=npm-${TARGETARCH},target=/root/.npm,sharing=locked \
+    groupadd -g 10001 appgroup \
+    && useradd -u 10001 -g appgroup -m -d /home/appuser -s /usr/sbin/nologin appuser \
+    && mkdir -p "$PNPM_HOME" "$QA11X_GLOBAL_DIR" /home/appuser/.config/pnpm /etc/profile.d \
+    && printf "minimum-release-age=1440\n" > /home/appuser/.config/pnpm/rc \
+    && npm install -g --no-fund --no-audit "pnpm@${PNPM_VERSION}" \
+    && pnpm add --global "@ionic/cli@${IONIC_VERSION}" \
+    && npm install -g --no-fund --no-audit npm@latest \
+    && node -e 'require("fs").writeFileSync("/opt/qa11x/package.json", JSON.stringify({name:"qa11x-v2-global-tools",private:true,dependencies:{promptfoo:"latest","@finos/calm-cli":"latest","@axe-core/playwright":"latest",appium:"latest","@pact-foundation/pact":"latest","@pact-foundation/pact-cli":"latest"},overrides:{typescript:"^5.9.3",tar:"^7.5.23","basic-ftp":"^6.2.6",tmp:"^0.2.7","brace-expansion":"^5.0.13",undici:"^8.12.4",axios:"^1.21.1",ws:"^8.23.0",semver:"^7.8.6","cross-spawn":"^7.0.6"}}, null, 2))' \
+    && npm --prefix "$QA11X_GLOBAL_DIR" install --omit=dev --ignore-scripts --no-fund --no-audit \
+    && for bin in promptfoo pf calm appium pact pact-broker pact-verifier pact-mock-server pact-stub-server pact-plugin pactflow; do \
+         if [[ -e "${QA11X_GLOBAL_DIR}/node_modules/.bin/${bin}" ]]; then \
+           ln -sf "${QA11X_GLOBAL_DIR}/node_modules/.bin/${bin}" "/usr/local/bin/${bin}"; \
+         fi; \
+       done \
+    && if [[ -x "${PNPM_HOME}/bin/ionic" ]]; then ln -sf "${PNPM_HOME}/bin/ionic" /usr/local/bin/ionic; fi \
+    && printf 'export PATH="/pnpm/bin:/pnpm:/opt/qa11x/node_modules/.bin:$PATH"\nexport NODE_PATH="/opt/qa11x/node_modules:/usr/local/lib/node_modules"\nexport PROMPTFOO_DISABLE_TELEMETRY=1\nexport DO_NOT_TRACK=1\nexport SCARF_ANALYTICS=false\n' > /etc/profile.d/qa11x.sh \
+    && chmod 0644 /etc/profile.d/qa11x.sh \
+    && pnpm store prune \
+    && chmod -R a+rX "$QA11X_GLOBAL_DIR" /usr/local/bin /usr/local/lib/node_modules "$PNPM_HOME" \
+    && rm -rf /root/.cache /root/.local/share/pnpm /tmp/* \
+    && mv /usr/local/bin/npm /usr/local/bin/.npm-real \
+    && chown -R 10001:10001 /app "$PNPM_HOME" /home/appuser
 
 COPY --chmod=0755 npm-shield.sh /usr/local/bin/npm
 
 ARG BUILD_DATE
 LABEL org.opencontainers.image.authors="Jesus Palencia <sinfallas@gmail.com> (Creado en Tecno Consultores)" \
-      org.opencontainers.image.description="Base Node.js 22 image with pnpm and Ionic CLI" \
+      org.opencontainers.image.description="Base Node.js 22 QA-11X v2 image with pnpm, Ionic CLI, Promptfoo, CALM, Appium, Axe-Core and Pact" \
       org.opencontainers.image.source="https://hub.docker.com/r/sinfallas/base-node-ionic" \
       org.opencontainers.image.licenses="GPL-2.0-only" \
       org.opencontainers.image.created="${BUILD_DATE}"
